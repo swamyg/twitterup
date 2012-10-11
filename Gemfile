@@ -8,6 +8,7 @@ gem 'rails', '3.2.8'
 gem 'mysql2', '~> 0.3.0'
 gem 'haml'
 gem 'json'
+gem 'sass-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
