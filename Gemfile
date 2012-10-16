@@ -9,6 +9,9 @@ gem 'mysql2', '~> 0.3.0'
 gem 'haml'
 gem 'json'
 gem 'sass-rails'
+gem 'factory_girl_rails'
+gem 'spork', '0.9.0'
+gem 'rspec-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
