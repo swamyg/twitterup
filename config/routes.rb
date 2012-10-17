@@ -1,4 +1,6 @@
 Twitterup::Application.routes.draw do
+
+  resources :streams
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
