@@ -12,6 +12,8 @@ gem 'sass-rails'
 gem 'factory_girl_rails'
 gem 'spork', '0.9.0'
 gem 'rspec-rails'
+gem 'httparty'
+gem 'mocha'
 
 # Use unicorn as the web server
 # gem 'unicorn'

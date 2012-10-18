@@ -4,28 +4,39 @@ describe StreamsController do
   render_views
 
   describe "#index" do
-
     context "when someone visits a particular stream on index page" do
-
-      it "fetches new content" do
-        controller.should_receive(:fetch_new_content)
-        get :index, :provider => 'twitter'
+      before do
+        @provider = FactoryGirl.create(:twitter)
       end
 
-      context "when the stream contains data" do
-        before do
-          @single_stream = FactoryGirl.create(:twitter_stream)
-        end
+      it "renders the appropriate provider template" do
+        get :index, :provider_name => @provider.name
+        response.should render_template(:partial => "streams/templates/_twitter")
+      end
+    end
+  end
 
-        it "gets the stream of that provider" do
-          assigns(:stream).should == [@single_stream]
-          get :index, :provider => 'twitter'
-        end
+  describe "#fetch_new_content" do
+    context "given a valid provider name" do
+      before do
+        @provider = FactoryGirl.create(:twitter)
+      end
 
-        it "renders the appropriate stream template" do
-          get :index, :provider => 'twitter'
-          response.should render_template(:partial => "streams/templates/_twitter")
-        end
+      it "finds the provider by it's name" do
+        controller.fetch_new_content(@provider.name)
+        assigns(:provider).should == @provider
+      end
+
+      it "invokes fetch_content on provider" do
+        Provider.any_instance.expects(:fetch_content)
+        controller.fetch_new_content(@provider.name)
+      end
+    end
+
+    context "given an invalid provider name" do
+      it "renders an error" do
+        get :index, :provider_name => 'something_bogus'
+        response.should render_template(:error)
       end
     end
   end
