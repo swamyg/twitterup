@@ -14,6 +14,7 @@ gem 'spork', '0.9.0'
 gem 'rspec-rails'
 gem 'httparty'
 gem 'mocha'
+gem 'fakeweb'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -1,0 +1,31 @@
+body {
+  #dashboard {
+    float: left;
+    background: #FFF;
+    width: 58em;
+    height: 50em;
+  }
+
+  #stream {
+    float: left;
+    background: #F7F7F7;
+    width: 31em;
+    height: 75em;
+    #raw_content {
+      display: none;
+    }
+
+    #stream_content {
+      ul {
+        list-style-type: none;
+        padding: 30px;
+        li {
+          padding: 10px;
+          color: #555;
+          border: 1px solid #CCC;
+          margin: 14px 4px;
+        }
+      }
+    }
+  }
+}
