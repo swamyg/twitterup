@@ -4,14 +4,25 @@ describe StreamsController do
   render_views
 
   describe "#index" do
-    context "when someone visits a particular stream on index page" do
+    context "given a provider" do
       before do
         @provider = FactoryGirl.create(:twitter)
+        url = @provider.url.gsub("QUERY", "Thredup")
+        FakeWeb.register_uri(:get, url, :body => "<html><body>Thredup is cool yo!</html></body>")
       end
 
-      it "renders the appropriate provider template" do
-        get :index, :provider_name => @provider.name
-        response.should render_template(:partial => "streams/templates/_twitter")
+      context "when someone visits a particular stream on index page" do
+        it "renders the appropriate provider template" do
+          get :index, :provider_name => @provider.name
+          response.should render_template(:partial => "streams/templates/_twitter")
+        end
+      end
+
+      context "when the page is updated through ajax" do
+        it "renders the content inline" do
+          get :index, :provider_name => @provider.name, :update => "true"
+          response.body.should == "<html><body>Thredup is cool yo!</html></body>"
+        end
       end
     end
   end
@@ -23,13 +34,14 @@ describe StreamsController do
       end
 
       it "finds the provider by it's name" do
-        controller.fetch_new_content(@provider.name)
+        controller.fetch_new_content(@provider.name, "thredup")
+        Provider.any_instance.stubs(:fetch_content)
         assigns(:provider).should == @provider
       end
 
       it "invokes fetch_content on provider" do
         Provider.any_instance.expects(:fetch_content)
-        controller.fetch_new_content(@provider.name)
+        controller.fetch_new_content(@provider.name, "thredup")
       end
     end
 

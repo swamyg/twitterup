@@ -1,6 +1,11 @@
+= javascript_include_tag "streams/index.onready"
+= javascript_include_tag "providers/#{@provider.name}.js"
 #dashboard
   =image_tag "logo.png"
 #stream
+  =hidden_field_tag :provider_name, @provider.name
+  =hidden_field_tag :query, @query
   =render :partial => "streams/templates/#{@provider.name}"
   #stream_content
+    #notification
     %ul
