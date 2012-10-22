@@ -11,6 +11,7 @@ $(function(){
       tweet = $(el).find('.js-tweet-text').text();
       build_and_append_tweet(tweet);
     });
+    $("#notification").text("Content last updated at: "+ new Date());
   }
 
   function build_and_append_tweet(tweet){

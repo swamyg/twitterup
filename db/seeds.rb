@@ -5,3 +5,4 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+Provider.create(:name => 'twitter', :url => 'https://twitter.com/search?q=QUERY&src=typd')

@@ -5,7 +5,6 @@ $(function(){
     url = "/streams?provider="+provider+"&q="+query+"&update=true"
     $.get(url, function(data){
       $("#raw_content").text(data);
-      $("#notification").text("Content last updated at: "+ new Date());
       $("#raw_content").trigger("streamupdated");
     });
 
